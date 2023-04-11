@@ -9,6 +9,9 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { CarCardComponent } from './car-card/car-card.component';
 import { CarpageComponent } from './carpage/carpage.component';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
+import { TaskComponent } from './task/task.component';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -17,13 +20,15 @@ import { EventdetailComponent } from './eventdetail/eventdetail.component';
     SidemenuComponent,
     CarCardComponent,
     CarpageComponent,
-    EventdetailComponent
+    EventdetailComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
