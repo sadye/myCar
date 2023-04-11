@@ -1,9 +1,33 @@
 <mat-card class="item" *ngIf="task" (dblclick)="edit.emit(task)">
-    <h2>{{ task.Nickname }}</h2>
-    <h4>{{task.Year}}</h4>
-    <p>
-      {{ task.description }}
-    </p>
+   
+  <h2>{{ task.Nickname }}</h2>
+
+    <div class="row">
+      <div class="column">
+        <h4>Make: {{task.Make}}</h4>
+      </div>
+      <div class="column">
+        <h4>Vin#: {{task.VinNumber}}</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h4>Model: {{task.Model}}</h4>
+      </div>
+      <div class="column">
+        <h4>Mileage: {{task.Mileage}}</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h4>Year: {{task.Year}}</h4>
+      </div>
+      <div class="column">
+      </div>
+    </div>
+
   </mat-card>
 
   

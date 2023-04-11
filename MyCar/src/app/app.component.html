@@ -1,5 +1,21 @@
 <navbar></navbar>
-<div>
-    <app-task *ngFor="let task of todo" [task]="task"></app-task>
-
+<div class="content-wrapper">
+    <button (click)="newTask()" mat-button>
+      <mat-icon>add</mat-icon> Add Car
+    </button>
+  
+    <div class="container-wrapper">
+        <div class="container">
+          <mat-card
+            cdkDropList
+            id="todo"
+            #todoList="cdkDropList"
+            [cdkDropListData]="todo"
+            (cdkDropListDropped)="drop($event)"
+            class="list">
+            <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+            <app-task (edit)="editTask('todo',$event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
+        </mat-card>
+        </div>
+  </div>
 </div>
