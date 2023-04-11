@@ -29,7 +29,7 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     BrowserAnimationsModule, 
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
     MatButtonModule
   ],
   providers: [],
