@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { CarCardComponent } from './car-card/car-card.component';
 import { CarpageComponent } from './carpage/carpage.component';
+import { EventdetailComponent } from './eventdetail/eventdetail.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CarpageComponent } from './carpage/carpage.component';
     NavbarComponent,
     SidemenuComponent,
     CarCardComponent,
-    CarpageComponent
+    CarpageComponent,
+    EventdetailComponent
   ],
   imports: [
     BrowserModule,
