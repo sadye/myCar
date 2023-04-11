@@ -1,0 +1,48 @@
+<mat-form-field>
+    <mat-label>Nickname</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Nickname" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Make</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Make" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Model</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Model" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Year</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Year" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mileage</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Mileage" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Vin#</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.VinNumber" />
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="data.task.description"></textarea>
+  </mat-form-field>
+  
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="{ task: data.task }">OK</button>
+    <button mat-button (click)="cancel()">Cancel</button>
+    
+    <button
+    *ngIf="data.enableDelete"
+    mat-fab
+    color="primary"
+    aria-label="Delete"
+    [mat-dialog-close]="{ task: data.task, delete: true }">
+    <mat-icon>delete</mat-icon>
+  </button>
+  </div>

@@ -1,0 +1,32 @@
+  
+  .content-wrapper {
+    max-width: 1400px;
+    margin: auto;
+  }
+  
+  .container-wrapper {
+    display: inline;
+    justify-content: space-around;
+  }
+  
+  .container {
+    width: 400px;
+    margin: 0px 25px 25px 0px;
+  }
+  
+  .list {
+    border: solid 0px #ccc;
+    min-height: 60px;
+    border-radius: 4px;
+  }
+  
+  app-new-task {
+    margin-bottom: 30px;
+  }
+  
+  .empty-label {
+    font-size: 2em;
+    padding-top: 10px;
+    text-align: center;
+    opacity: 0.2;
+  }

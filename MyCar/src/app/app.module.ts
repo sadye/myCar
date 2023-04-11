@@ -12,6 +12,12 @@ import { CarpageComponent } from './carpage/carpage.component';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { TaskComponent } from './task/task.component';
 import { MatCardModule } from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -22,7 +28,8 @@ import { MatCardModule } from '@angular/material/card';
     CarCardComponent,
     CarpageComponent,
     EventdetailComponent,
-    TaskComponent
+    TaskComponent,
+    TaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,12 @@ import { MatCardModule } from '@angular/material/card';
     BrowserAnimationsModule, 
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

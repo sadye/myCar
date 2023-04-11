@@ -1,0 +1,14 @@
+.column {
+    float: left;
+    width: 50%;
+    }
+
+    :host {
+        display: block;
+      }
+      
+      .item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
