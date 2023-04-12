@@ -18,6 +18,8 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatMenuModule} from '@angular/material/menu'
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    FlexLayoutModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

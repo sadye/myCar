@@ -1,33 +1,30 @@
 <mat-card class="item" *ngIf="task" (dblclick)="edit.emit(task)">
-   
-  <h2>{{ task.Nickname }}</h2>
+  <mat-card-content>
+  <div fxLayout="row" fxLayoutAlign="space-between center" >
+    <h2>{{ task.Nickname }}</h2>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="edit.emit(task)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-menu>
+</div>
 
-    <div class="row">
-      <div class="column">
-        <h4>Make: {{task.Make}}</h4>
-      </div>
-      <div class="column">
-        <h4>Vin#: {{task.VinNumber}}</h4>
-      </div>
+  <div fxLayout="column" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutGap="15px">
+      <p>Make: <strong>{{task.Make}}</strong></p>
+      <p>Model: <strong>{{task.Model}}</strong></p>
+      <p>Year: <strong>{{task.Year}}</strong></p>
     </div>
-
-    <div class="row">
-      <div class="column">
-        <h4>Model: {{task.Model}}</h4>
-      </div>
-      <div class="column">
-        <h4>Mileage: {{task.Mileage}}</h4>
-      </div>
+    <div fxLayout="row" fxLayoutGap="15px">
+      <p>Mileage: <strong>{{task.Mileage}}</strong></p>
+      <p>Vin#: <strong>{{task.VinNumber}}</strong></p>
     </div>
-
-    <div class="row">
-      <div class="column">
-        <h4>Year: {{task.Year}}</h4>
-      </div>
-      <div class="column">
-      </div>
-    </div>
-
+  </div>
+</mat-card-content>
   </mat-card>
 
   
