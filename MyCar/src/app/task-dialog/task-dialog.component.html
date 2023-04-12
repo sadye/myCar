@@ -1,23 +1,31 @@
+
+<mat-toolbar color="primary">
+  <h1 *ngIf="data.enableDelete">Edit Car</h1>
+  <h1 *ngIf="!data.enableDelete">New Car</h1>
+</mat-toolbar>
+<div class="wrapper">
 <mat-form-field>
     <mat-label>Nickname</mat-label>
     <input matInput cdkFocusInitial [(ngModel)]="data.task.Nickname" />
   </mat-form-field>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field>
+      <mat-label>Make</mat-label>
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Make" />
+    </mat-form-field>
+    
 
-  <mat-form-field>
-    <mat-label>Make</mat-label>
-    <input matInput cdkFocusInitial [(ngModel)]="data.task.Make" />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Model</mat-label>
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Model" />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Model</mat-label>
-    <input matInput cdkFocusInitial [(ngModel)]="data.task.Model" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Year</mat-label>
-    <input matInput cdkFocusInitial [(ngModel)]="data.task.Year" />
-  </mat-form-field>
-
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Year" />
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
   <mat-form-field>
     <mat-label>Mileage</mat-label>
     <input matInput cdkFocusInitial [(ngModel)]="data.task.Mileage" />
@@ -27,15 +35,16 @@
     <mat-label>Vin#</mat-label>
     <input matInput cdkFocusInitial [(ngModel)]="data.task.VinNumber" />
   </mat-form-field>
+  </div>
   
   <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea matInput [(ngModel)]="data.task.description"></textarea>
   </mat-form-field>
   
-  <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="{ task: data.task }">OK</button>
-    <button mat-button (click)="cancel()">Cancel</button>
+  <div mat-dialog-actions >
+    <button mat-raised-button color="primary" [mat-dialog-close]="{ task: data.task }">OK</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
     
     <button
     *ngIf="data.enableDelete"
@@ -46,3 +55,4 @@
     <mat-icon>delete</mat-icon>
   </button>
   </div>
+</div>
