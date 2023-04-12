@@ -28,7 +28,7 @@ export class AppComponent {
 
   newTask(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
-      width: '270px',
+      width: '500px',
       data: {
         task: {},
       },
@@ -59,7 +59,7 @@ export class AppComponent {
 
     editTask(list: 'todo', task: Task): void {
       const dialogRef = this.dialog.open(TaskDialogComponent, {
-        width: '270px',
+        width: '500px',
         data: {
           task,
           enableDelete: true,
