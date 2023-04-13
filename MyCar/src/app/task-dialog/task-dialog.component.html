@@ -6,23 +6,23 @@
 <div class="wrapper">
 <mat-form-field>
     <mat-label>Nickname</mat-label>
-    <input matInput cdkFocusInitial [(ngModel)]="data.task.Nickname" />
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.Nickname" required/>
   </mat-form-field>
   <div fxLayout="row" fxLayoutGap="20px">
     <mat-form-field>
       <mat-label>Make</mat-label>
-      <input matInput cdkFocusInitial [(ngModel)]="data.task.Make" />
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Make" required/>
     </mat-form-field>
     
 
     <mat-form-field>
       <mat-label>Model</mat-label>
-      <input matInput cdkFocusInitial [(ngModel)]="data.task.Model" />
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Model" required/>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Year</mat-label>
-      <input matInput cdkFocusInitial [(ngModel)]="data.task.Year" />
+      <input matInput cdkFocusInitial [(ngModel)]="data.task.Year" required/>
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
@@ -33,7 +33,7 @@
 
   <mat-form-field>
     <mat-label>Vin#</mat-label>
-    <input matInput cdkFocusInitial [(ngModel)]="data.task.VinNumber" />
+    <input matInput cdkFocusInitial [(ngModel)]="data.task.VinNumber" required/>
   </mat-form-field>
   </div>
   

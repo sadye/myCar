@@ -19,7 +19,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatMenuModule} from '@angular/material/menu'
+import {MatMenuModule} from '@angular/material/menu';
+import { EventPageComponent } from './event-page/event-page.component';
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import {MatMenuModule} from '@angular/material/menu'
     CarpageComponent,
     EventdetailComponent,
     TaskComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    EventPageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import {MatMenuModule} from '@angular/material/menu'
     FormsModule,
     DragDropModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
