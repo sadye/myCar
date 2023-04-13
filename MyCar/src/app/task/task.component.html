@@ -1,30 +1,28 @@
 <mat-card class="item" *ngIf="task" (dblclick)="edit.emit(task)">
+  <mat-card-header>
+    <mat-card-title>
+      {{task.Nickname}}
+    </mat-card-title>
+    <mat-card-subtitle>{{task.Year}} {{task.Make}} {{task.Model}}</mat-card-subtitle>
+  </mat-card-header>
   <mat-card-content>
-  <div fxLayout="row" fxLayoutAlign="space-between center" >
-    <h2>{{ task.Nickname }}</h2>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="edit.emit(task)">
-        <mat-icon>edit</mat-icon>
-        <span>Edit</span>
-      </button>
-    </mat-menu>
-</div>
-
-  <div fxLayout="column" fxLayoutGap="15px">
-    <div fxLayout="row" fxLayoutGap="15px">
-      <p>Make: <strong>{{task.Make}}</strong></p>
-      <p>Model: <strong>{{task.Model}}</strong></p>
-      <p>Year: <strong>{{task.Year}}</strong></p>
-    </div>
+  <br>
     <div fxLayout="row" fxLayoutGap="15px">
       <p>Mileage: <strong>{{task.Mileage}}</strong></p>
       <p>Vin#: <strong>{{task.VinNumber}}</strong></p>
     </div>
-  </div>
-</mat-card-content>
-  </mat-card>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button>
+      <mat-icon>update</mat-icon>
+    </button>
+  <button mat-button>
+    <mat-icon>queue</mat-icon>
+  </button>
+  <button mat-button (click)="edit.emit(task)">
+    <mat-icon>edit</mat-icon>
+  </button>
+  </mat-card-actions>
+</mat-card>
 
   
