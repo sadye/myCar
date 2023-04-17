@@ -24,6 +24,7 @@ import { EventPageComponent } from './event-page/event-page.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
