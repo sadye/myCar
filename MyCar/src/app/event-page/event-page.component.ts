@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDialogComponent, EventDialogResult } from '../event-dialog/event-dialog.component';
 import { Event } from '../eventdetail/event';
+import { CarService } from '../cars.service';
+import { EventService } from '../events/event.service';
 
 @Component({
   selector: 'app-event-page',
@@ -11,7 +13,9 @@ import { Event } from '../eventdetail/event';
 })
 export class EventPageComponent {
   todo: Event[] = [];
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, service: EventService) {
+    service.getEvents(this.todo);
+  }
 
   newEvent(): void {
     const dialogRef = this.dialog.open(EventDialogComponent, {
