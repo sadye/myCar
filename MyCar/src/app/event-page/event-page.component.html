@@ -1,1 +1,19 @@
-<p>event-page works!</p>
+<div class="content-wrapper">
+    <button (click)="newEvent()" mat-button>
+      <mat-icon>add</mat-icon> Add Event
+    </button>
+    <div class="container-wrapper">
+        <div class="container">
+          <mat-card
+            cdkDropList
+            id="todo"
+            #todoList="cdkDropList"
+            [cdkDropListData]="todo"
+            (cdkDropListDropped)="drop($event)"
+            class="list">
+            <p class="empty-label" *ngIf="todo.length === 0">No Events</p>
+            <app-eventdetail (edit)="editEvent('todo',$event)" *ngFor="let event of todo" cdkDrag [event]="event"></app-eventdetail>
+          </mat-card>
+        </div>
+    </div>
+  </div>

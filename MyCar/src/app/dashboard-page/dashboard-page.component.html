@@ -1,0 +1,22 @@
+<div fxLayout="row" fxLayoutAlign="space-between start">
+    <div class="content-wrapper">
+      <button (click)="newTask()" mat-button>
+        <mat-icon>add</mat-icon> Add Car
+      </button>
+      <sidemenu></sidemenu>
+      <div class="container-wrapper">
+          <div class="container">
+            <mat-card
+              cdkDropList
+              id="todo"
+              #todoList="cdkDropList"
+              [cdkDropListData]="todo"
+              (cdkDropListDropped)="drop($event)"
+              class="list">
+              <p class="empty-label" *ngIf="todo.length === 0">No Cars</p>
+              <app-task (edit)="editTask('todo',$event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
+            </mat-card>
+          </div>
+      </div>
+    </div>
+  </div>

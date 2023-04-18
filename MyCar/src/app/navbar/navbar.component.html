@@ -10,9 +10,11 @@
     <!-- HOME -->
     <button mat-button routerLink="/" 
     routerLinkActive="active" ariaCurrentWhenActive="page" aria-hidden="false">Dashboard</button>
-    <button mat-button > Events </button>
+    <button mat-button routerLink="/Events" 
+    routerLinkActive="active" ariaCurrentWhenActive="page"> Events </button>
     <button mat-button > Price Analytics </button>
     <button mat-button> Resources </button>
 
   </mat-toolbar>
+  <router-outlet></router-outlet>
 </p>

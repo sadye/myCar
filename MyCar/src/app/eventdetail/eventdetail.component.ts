@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Input, Output, EventEmitter } from '@angular/core';
+import {Event} from "./event"
 
 @Component({
   selector: 'app-eventdetail',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./eventdetail.component.scss']
 })
 export class EventdetailComponent {
+  @Input() event: Event | null = null;
+  @Output() edit = new EventEmitter<Event>();
 
 }
