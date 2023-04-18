@@ -21,6 +21,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import { EventPageComponent } from './event-page/event-page.component';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 
 
@@ -35,7 +37,9 @@ import { EventPageComponent } from './event-page/event-page.component';
     EventdetailComponent,
     TaskComponent,
     TaskDialogComponent,
-    EventPageComponent
+    EventPageComponent,
+    EventDialogComponent,
+    DashboardPageComponent
   ],
   imports: [
     BrowserModule,
