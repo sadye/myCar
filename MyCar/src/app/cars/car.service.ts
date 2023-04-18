@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { Firestore, getFirestore } from "firebase/firestore";
+import { Firestore, doc, getFirestore } from "firebase/firestore";
 import { Task } from "../task/task";
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../task-dialog/task-dialog.component';
@@ -30,18 +30,18 @@ export class CarService {
 
   constructor() { }
 
-  async getCars(list: Task[]) {
-    const querySnapshot = await getDocs(collection(db, "cars"));
+  async getCars(list: Task[], email: String) {
+    const querySnapshot = await getDocs(collection(db, "users/" + email + "/cars"));
     querySnapshot.forEach((doc) => {
         var newTask: Task;
         newTask = {
             Nickname: doc.get("Nickname"),
             Make: doc.get("Make"),
             Model: doc.get("Model"),
-            Year: '2003',
-            Mileage: '104356',
-            VinNumber: '12',
-            description: 'Go to the store and buy milk'
+            Year: doc.get("Year"),
+            Mileage: doc.get("Mileage"),
+            VinNumber: doc.get("VinNumber"),
+            description: doc.get("Description")
           }
         list.push(newTask);
     })
