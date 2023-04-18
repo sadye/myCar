@@ -4,7 +4,7 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { TaskDialogResult } from './task-dialog/task-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-
+import { CarService } from './cars/car.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +12,11 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  todo: Task[] = [
-    {
-      Nickname: 'Green Machine',
-      Make: 'Chevy',
-      Model: 'Tahoe',
-      Year: '2003',
-      Mileage: '104356',
-      VinNumber: '12',
-      description: 'Go to the store and buy milk'
-    }
-  ];
-
-  constructor(private dialog: MatDialog) {}
+  todo: Task[] = [];
+  
+  constructor(private dialog: MatDialog, service: CarService) {
+    service.getCars(this.todo);
+  }
 
   newTask(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
