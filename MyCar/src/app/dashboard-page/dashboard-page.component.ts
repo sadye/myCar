@@ -67,15 +67,20 @@ export class DashboardPageComponent {
         if (!result) {
           return;
         }
-        if (task.id == null) {
-          task.id = result.task.Nickname
-        }
+
         const dataList = this[list];
         const taskIndex = dataList.indexOf(task);
+        if (result.task.id == null) {
+          result.task.id = result.task.Nickname
+        }
+        /*if (result.task.Nickname != task.Nickname) {
+          result.delete = true
+        }*/
         if (result.delete) {
+          //this.service.deleteCar(this.email,result.task.id,result.task)
           dataList.splice(taskIndex, 1);
         } else {
-          this.service.setCar(this.email,task.id,result.task)
+          this.service.setCar(this.email,result.task.id,result.task)
           dataList[taskIndex] = task;
         }
       });

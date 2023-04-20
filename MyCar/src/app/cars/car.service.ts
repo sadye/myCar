@@ -35,6 +35,7 @@ export class CarService {
     querySnapshot.forEach((doc) => {
         var newTask: Task;
         newTask = {
+            id: doc.get("id"),
             Nickname: doc.get("Nickname"),
             Make: doc.get("Make"),
             Model: doc.get("Model"),
@@ -60,6 +61,8 @@ async setCar(email: string, id: string, car: Task) {
     VinNumber: car.VinNumber,
     Description: car.Description
   })
+
+
 }
 
 }

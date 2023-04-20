@@ -1,5 +1,5 @@
 export interface Task {
-    id?: string;
+    id: string;
     Nickname: string;
     Make: string;
     Model: string;

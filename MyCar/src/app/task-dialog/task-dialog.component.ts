@@ -8,7 +8,7 @@ import { Task } from '../task/task';
   styleUrls: ['./task-dialog.component.scss'],
 })
 export class TaskDialogComponent {
-  private backupTask: Partial<Task> = { ...this.data.task };
+  private backupTask: Task = { ...this.data.task };
 
   constructor(
     public dialogRef: MatDialogRef<TaskDialogComponent>,
@@ -30,7 +30,7 @@ export class TaskDialogComponent {
 }
 
 export interface TaskDialogData {
-  task: Partial<Task>;
+  task: Task;
   enableDelete: boolean;
 }
 
