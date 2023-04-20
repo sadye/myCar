@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { Firestore, deleteDoc, doc, getFirestore, setDoc,updateDoc} from "firebase/firestore";
+import { Firestore, deleteDoc, doc, getDoc, getFirestore, setDoc,updateDoc, query, where} from "firebase/firestore";
 import { Task } from "../task/task";
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../task-dialog/task-dialog.component';
@@ -61,8 +61,18 @@ async setCar(email: string, id: string, car: Task) {
     VinNumber: car.VinNumber,
     Description: car.Description
   })
+}
 
-
+async deleteCar(email:string, id: string, isId: boolean) {
+  if (!isId) {
+    const q = query(collection(db,'users', email, 'cars'), where("Nickname", "==",id))
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((document) => {
+      deleteDoc(doc(db,'users', email, 'cars', document.id))
+    })
+  } else {
+    await deleteDoc(doc(db,'users', email, 'cars', id))
+  }
 }
 
 }

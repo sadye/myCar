@@ -56,6 +56,7 @@ export class DashboardPageComponent {
     }
 
     editTask(list: 'todo', task: Task): void {
+      const name = task.Nickname
       const dialogRef = this.dialog.open(TaskDialogComponent, {
         width: '500px',
         data: {
@@ -73,11 +74,11 @@ export class DashboardPageComponent {
         if (result.task.id == null) {
           result.task.id = result.task.Nickname
         }
-        /*if (result.task.Nickname != task.Nickname) {
-          result.delete = true
-        }*/
+        if (result.task.Nickname != name) {
+          this.service.deleteCar(this.email, name, false)
+        }
         if (result.delete) {
-          //this.service.deleteCar(this.email,result.task.id,result.task)
+          this.service.deleteCar(this.email,result.task.id, true)
           dataList.splice(taskIndex, 1);
         } else {
           this.service.setCar(this.email,result.task.id,result.task)
