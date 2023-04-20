@@ -12,9 +12,13 @@ import { Task } from '../task/task';
 })
 export class DashboardPageComponent {
   todo: Task[] = [];
+  service: CarService
+  email: string
   
   constructor(private dialog: MatDialog, service: CarService) {
-    service.getCars(this.todo, "chitchings16@gmail.com");
+    this.service = service
+    this.email = "chitchings16@gmail.com"
+    service.getCars(this.todo, this.email);
   }
 
   newTask(): void {
@@ -30,6 +34,9 @@ export class DashboardPageComponent {
         if (!result) {
           return;
         }
+        result.task.id = result.task.Nickname
+        result.task.Account = this.email
+        this.service.setCar(this.email, result.task.id, result.task)
         this.todo.push(result.task);
       });
     }
@@ -49,6 +56,7 @@ export class DashboardPageComponent {
     }
 
     editTask(list: 'todo', task: Task): void {
+      const name = task.Nickname
       const dialogRef = this.dialog.open(TaskDialogComponent, {
         width: '500px',
         data: {
@@ -60,11 +68,20 @@ export class DashboardPageComponent {
         if (!result) {
           return;
         }
+
         const dataList = this[list];
         const taskIndex = dataList.indexOf(task);
+        if (result.task.id == null) {
+          result.task.id = result.task.Nickname
+        }
+        if (result.task.Nickname != name) {
+          this.service.deleteCar(this.email, name, false)
+        }
         if (result.delete) {
+          this.service.deleteCar(this.email,result.task.id, true)
           dataList.splice(taskIndex, 1);
         } else {
+          this.service.setCar(this.email,result.task.id,result.task)
           dataList[taskIndex] = task;
         }
       });

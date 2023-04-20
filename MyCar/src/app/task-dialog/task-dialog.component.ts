@@ -8,7 +8,7 @@ import { Task } from '../task/task';
   styleUrls: ['./task-dialog.component.scss'],
 })
 export class TaskDialogComponent {
-  private backupTask: Partial<Task> = { ...this.data.task };
+  private backupTask: Task = { ...this.data.task };
 
   constructor(
     public dialogRef: MatDialogRef<TaskDialogComponent>,
@@ -16,20 +16,21 @@ export class TaskDialogComponent {
   ) {}
 
   cancel(): void {
-    
+    this.data.task.Account = this.backupTask.Account;
+    this.data.task.id = this.backupTask.id;
     this.data.task.Nickname = this.backupTask.Nickname;
     this.data.task.Make = this.backupTask.Make;
     this.data.task.Model = this.backupTask.Model;
     this.data.task.Year = this.backupTask.Year;
     this.data.task.Mileage = this.backupTask.Mileage;
     this.data.task.VinNumber = this.backupTask.VinNumber;
-    this.data.task.description = this.backupTask.description;
+    this.data.task.Description = this.backupTask.Description;
     this.dialogRef.close();
   }
 }
 
 export interface TaskDialogData {
-  task: Partial<Task>;
+  task: Task;
   enableDelete: boolean;
 }
 
