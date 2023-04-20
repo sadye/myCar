@@ -6,5 +6,6 @@ export interface Task {
     Year: string;
     Mileage: string;
     VinNumber: string;
-    description: string;
+    Description: string;
+    Account: string;
   }

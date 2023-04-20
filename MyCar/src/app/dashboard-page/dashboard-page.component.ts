@@ -12,9 +12,13 @@ import { Task } from '../task/task';
 })
 export class DashboardPageComponent {
   todo: Task[] = [];
+  service: CarService
+  email: string
   
   constructor(private dialog: MatDialog, service: CarService) {
-    service.getCars(this.todo, "chitchings16@gmail.com");
+    this.service = service
+    this.email = "chitchings16@gmail.com"
+    service.getCars(this.todo, this.email);
   }
 
   newTask(): void {
@@ -30,6 +34,9 @@ export class DashboardPageComponent {
         if (!result) {
           return;
         }
+        result.task.id = result.task.Nickname
+        result.task.Account = this.email
+        this.service.setCar(this.email, result.task.id, result.task)
         this.todo.push(result.task);
       });
     }
@@ -60,11 +67,15 @@ export class DashboardPageComponent {
         if (!result) {
           return;
         }
+        if (task.id == null) {
+          task.id = result.task.Nickname
+        }
         const dataList = this[list];
         const taskIndex = dataList.indexOf(task);
         if (result.delete) {
           dataList.splice(taskIndex, 1);
         } else {
+          this.service.setCar(this.email,task.id,result.task)
           dataList[taskIndex] = task;
         }
       });

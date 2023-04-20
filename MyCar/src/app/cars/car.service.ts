@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { Firestore, doc, getFirestore } from "firebase/firestore";
+import { Firestore, deleteDoc, doc, getFirestore, setDoc,updateDoc} from "firebase/firestore";
 import { Task } from "../task/task";
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../task-dialog/task-dialog.component';
@@ -41,9 +41,25 @@ export class CarService {
             Year: doc.get("Year"),
             Mileage: doc.get("Mileage"),
             VinNumber: doc.get("VinNumber"),
-            description: doc.get("Description")
+            Description: doc.get("Description"),
+            Account: doc.get("Account")
           }
         list.push(newTask);
     })
 }
+
+
+async setCar(email: string, id: string, car: Task) {
+  await setDoc(doc(db,'users',email,'cars',id), {
+    Nickname: car.Nickname,
+    Make: car.Make,
+    Model: car.Model,
+    Account: car.Account,
+    Year: car.Year,
+    Mileage: car.Mileage,
+    VinNumber: car.VinNumber,
+    Description: car.Description
+  })
+}
+
 }

@@ -16,14 +16,15 @@ export class TaskDialogComponent {
   ) {}
 
   cancel(): void {
-    
+    this.data.task.Account = this.backupTask.Account;
+    this.data.task.id = this.backupTask.id;
     this.data.task.Nickname = this.backupTask.Nickname;
     this.data.task.Make = this.backupTask.Make;
     this.data.task.Model = this.backupTask.Model;
     this.data.task.Year = this.backupTask.Year;
     this.data.task.Mileage = this.backupTask.Mileage;
     this.data.task.VinNumber = this.backupTask.VinNumber;
-    this.data.task.description = this.backupTask.description;
+    this.data.task.Description = this.backupTask.Description;
     this.dialogRef.close();
   }
 }
