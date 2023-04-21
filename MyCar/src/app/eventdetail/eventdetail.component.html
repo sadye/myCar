@@ -1,4 +1,4 @@
-<mat-card class="item" *ngIf="event">
+<mat-card class="item" *ngIf="event" (dblclick)="edit.emit(event)">
   <mat-card-header>
     <mat-card-title>
       {{event.Name}}

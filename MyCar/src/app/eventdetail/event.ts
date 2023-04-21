@@ -1,5 +1,5 @@
 export interface Event {
-  id?: string;
+  id: string;
   Name: string;
   Car: string;
   Type: string;
