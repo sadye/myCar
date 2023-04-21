@@ -8,7 +8,7 @@ import { Event } from '../eventdetail/event';
   styleUrls: ['./event-dialog.component.scss']
 })
 export class EventDialogComponent {
-  private backupEvent: Partial<Event> = {...this.data.event};
+  private backupEvent: Event = {...this.data.event};
 
   constructor(
     public dialogRef: MatDialogRef<EventDialogComponent>,
@@ -29,7 +29,7 @@ export class EventDialogComponent {
   
 }
 export interface EventDialogData {
-  event: Partial<Event>;
+  event: Event;
   enableDelete: boolean;
 }
 

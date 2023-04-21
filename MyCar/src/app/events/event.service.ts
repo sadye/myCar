@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { Firestore, collectionGroup, doc, getDoc, getFirestore, where } from "firebase/firestore";
+import { Firestore, deleteDoc, doc, getDoc, getFirestore, setDoc,updateDoc, query, where, collectionGroup, DocumentReference, QuerySnapshot} from "firebase/firestore";
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../task-dialog/task-dialog.component';
-import { collection, getDocs, query } from "firebase/firestore"; 
+import { collection, getDocs } from "firebase/firestore"; 
 import { Inject, Injectable, Type } from "@angular/core";
 import { Event } from '../eventdetail/event';
 
@@ -34,11 +34,11 @@ export class EventService {
     const events = query(collectionGroup(db,'events'));
     const querySnapshot = await getDocs(events);
     querySnapshot.forEach(async(doc)  => {
-      const car = await getDoc(doc.get("Car"));
       var newEvent: Event;
       newEvent = {
+        id: doc.get("id"),
         Name: doc.get("Name"),
-        Car: car.get("Nickname"),
+        Car: doc.get("Car"),
         Date: doc.get("Date"),
         Price: doc.get("Price"),
         Type: doc.get("Type"),
@@ -47,4 +47,45 @@ export class EventService {
       list.push(newEvent);
     })
   }
+  
+  
+  makeRandom(lengthOfCode: number, possible: string) {
+    let text = "";
+    for (let i = 0; i < lengthOfCode; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+      return text;
+  }
+
+  async getCarRef(email: string, event: Event) {
+    const q = query(collection(db,'users', email, 'cars'));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (doc.get("Nickname") == event.Car) {
+        event.Car = doc.ref.path
+      }
+    })
+  }
+
+  async setEvent(email: string, event: Event) {
+    var id = event.id
+    if (id == "" || id == null) {
+      id = this.makeRandom(15, "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./;'[]\=-)(*&^%$#@!~`")
+    }
+      await setDoc(doc(db, 'users', email, 'cars', event.Car, 'events', id), {
+        Name: event.Name,
+        Date: event.Date,
+        Type: event.Type,
+        Price: event.Price,
+        Description: event.Description,
+        Car: event.Car,
+        id: id
+      })
+  }
+
+  async deleteEvent(email: string, event: Event) {
+    await deleteDoc(doc(db,'users', email, 'cars', event.Car, 'events', event.id))
+  }
+
+
 }

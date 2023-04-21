@@ -5,6 +5,7 @@ import { EventDialogComponent, EventDialogResult } from '../event-dialog/event-d
 import { Event } from '../eventdetail/event';
 import { CarService } from '../cars.service';
 import { EventService } from '../events/event.service';
+import { every } from 'rxjs';
 
 @Component({
   selector: 'app-event-page',
@@ -13,8 +14,13 @@ import { EventService } from '../events/event.service';
 })
 export class EventPageComponent {
   todo: Event[] = [];
+  service: EventService
+  email: string
+
   constructor(private dialog: MatDialog, service: EventService) {
-    service.getEvents(this.todo);
+    this.service = service
+    this.email = "chitchings16@gmail.com"
+    this.service.getEvents(this.todo);
   }
 
   newEvent(): void {
@@ -30,6 +36,9 @@ export class EventPageComponent {
         if (!result) {
           return;
         }
+        const carName = result.event.Car
+        this.service.getCarRef(this.email, result.event)
+        this.service.setEvent(this.email,result.event)
         this.todo.push(result.event);
       });
     }
@@ -63,8 +72,10 @@ export class EventPageComponent {
         const dataList = this[list];
         const eventIndex = dataList.indexOf(event);
         if (result.delete) {
+          this.service.deleteEvent(this.email, result.event)
           dataList.splice(eventIndex, 1);
         } else {
+          this.service.setEvent(this.email, result.event)
           dataList[eventIndex] = event;
         }
       });

@@ -65,7 +65,7 @@ async setCar(email: string, id: string, car: Task) {
 
 async deleteCar(email:string, id: string, isId: boolean) {
   if (!isId) {
-    const q = query(collection(db,'users', email, 'cars'), where("Nickname", "==",id))
+    const q = query(collection(db,'users', email, 'cars'), where("Nickname", "==", id))
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((document) => {
       deleteDoc(doc(db,'users', email, 'cars', document.id))
