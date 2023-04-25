@@ -23,6 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { EventPageComponent } from './event-page/event-page.component';
 import { EventDialogComponent } from './event-dialog/event-dialog.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 
@@ -39,7 +40,8 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
     TaskDialogComponent,
     EventPageComponent,
     EventDialogComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
