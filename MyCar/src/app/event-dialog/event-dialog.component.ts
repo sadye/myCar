@@ -2,6 +2,11 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Event } from '../eventdetail/event';
 
+interface EventType {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-event-dialog',
   templateUrl: './event-dialog.component.html',
@@ -14,6 +19,11 @@ export class EventDialogComponent {
     public dialogRef: MatDialogRef<EventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EventDialogData
   ) {}
+  types: EventType[] = [
+    {value: 'maintenance-0', viewValue: 'Maintenance'},
+    {value: 'accident-1', viewValue: 'Accident'},
+    {value: 'self-2', viewValue: 'Self'},
+  ];
 
   cancel(): void {
     

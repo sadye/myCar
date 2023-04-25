@@ -10,7 +10,7 @@
     <div fxLayout="row" fxLayoutGap="15px">
       <p>Type: <strong>{{event.Type}}</strong></p>
       <p>Price: <strong>{{event.Price}}</strong></p>
-      <p>Date: <strong>{{event.Date}}</strong></p>
+      <p>Date: <strong>{{event.Date | date}}</strong></p>
     </div>
     <p>Description: <strong>{{event.Description}}</strong></p>
   </mat-card-content>

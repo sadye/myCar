@@ -24,6 +24,12 @@ import { EventPageComponent } from './event-page/event-page.component';
 import { EventDialogComponent } from './event-dialog/event-dialog.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 
 
@@ -57,6 +63,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
     DragDropModule,
     FlexLayoutModule,
     MatMenuModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
