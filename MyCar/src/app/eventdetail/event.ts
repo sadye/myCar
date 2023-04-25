@@ -5,5 +5,5 @@ export interface Event {
   Type: string;
   Description: string;
   Price: number;
-  Date: string;
+  Date: Date;
 }

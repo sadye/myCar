@@ -14,6 +14,8 @@ import { every } from 'rxjs';
 })
 export class EventPageComponent {
   todo: Event[] = [];
+  past: Event[] = []
+  future: Event[] = []
   service: EventService
   email: string
 
@@ -21,6 +23,19 @@ export class EventPageComponent {
     this.service = service
     this.email = "chitchings16@gmail.com"
     this.service.getEvents(this.todo);
+    console.log(new Date().toDateString())
+  }
+
+  isPast(element: Event, index: any, array: Event[]) { 
+    return (element.Date < new Date()); 
+ }
+ isFuture(element: Event, index: any, array: Event[]) { 
+  return (element.Date >= new Date()); 
+}
+
+  filterEvents(){
+    this.past = this.todo.filter(this.isPast);
+    this.future = this.todo.filter(this.isFuture);
   }
 
   newEvent(): void {
