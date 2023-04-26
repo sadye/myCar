@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import { LoginService } from '../login/login.service';
+import { AppComponent } from '../app.component';
 /**
 * @title login demo
 */
@@ -8,12 +10,28 @@ styleUrls: ['login-page.component.scss'],
 templateUrl: 'login-page.component.html',
 })
 export class LoginPageComponent {
+    service: LoginService
+    connected: boolean
+
+    constructor(service: LoginService) {
+        this.service = service;
+        this.connected = false;
+    }
 username : string ="";
+signupusername: string="";
 password : string ="";
+signuppassword : string ="";
+password2 : string ="";
 show: boolean= false;
 submit(){
-console.log("user name is " + this.username)
-this.clear();
+    this.service.signIn(this.username,this.password);
+    this.connected = this.service.connected;
+}
+signUp() {
+    if (this.password === this.password2) {
+    this.service.signUp(this.signupusername,this.signuppassword)
+    this.connected = this.service.connected;
+    }
 }
 clear(){
 this.username ="";

@@ -6,6 +6,22 @@ import { Event } from '../eventdetail/event';
 import { CarService } from '../cars.service';
 import { EventService } from '../events/event.service';
 import { every } from 'rxjs';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+var email: string
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    if (user.email) {
+      email = user.email
+    }
+    // ...
+  } else {
+    email = ""
+  }
+});
 
 @Component({
   selector: 'app-event-page',
@@ -17,12 +33,10 @@ export class EventPageComponent {
   past: Event[] = []
   future: Event[] = []
   service: EventService
-  email: string
 
   constructor(private dialog: MatDialog, service: EventService) {
     this.service = service
-    this.email = "chitchings16@gmail.com"
-    this.service.getEvents(this.todo);
+    this.service.getEvents(this.todo, email);
     console.log(new Date().toDateString())
   }
 
@@ -52,8 +66,8 @@ export class EventPageComponent {
           return;
         }
         const carName = result.event.Car
-        this.service.getCarRef(this.email, result.event)
-        this.service.setEvent(this.email,result.event)
+        this.service.getCarRef(email, result.event)
+        this.service.setEvent(email,result.event)
         this.todo.push(result.event);
       });
     }
@@ -87,10 +101,10 @@ export class EventPageComponent {
         const dataList = this[list];
         const eventIndex = dataList.indexOf(event);
         if (result.delete) {
-          this.service.deleteEvent(this.email, result.event)
+          this.service.deleteEvent(email, result.event)
           dataList.splice(eventIndex, 1);
         } else {
-          this.service.setEvent(this.email, result.event)
+          this.service.setEvent(email, result.event)
           dataList[eventIndex] = event;
         }
       });

@@ -4,6 +4,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { CarService } from '../cars/car.service';
 import { TaskDialogComponent, TaskDialogResult } from '../task-dialog/task-dialog.component';
 import { Task } from '../task/task';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AppComponent } from '../app.component';
+
+var email: string
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    if (user.email) {
+      email = user.email
+    }
+    // ...
+  } else {
+    email = ""
+  }
+});
 
 @Component({
   selector: 'app-dashboard-page',
@@ -13,12 +30,13 @@ import { Task } from '../task/task';
 export class DashboardPageComponent {
   todo: Task[] = [];
   service: CarService
-  email: string
+  appComponent: AppComponent
   
-  constructor(private dialog: MatDialog, service: CarService) {
+  constructor(private dialog: MatDialog, service: CarService, appComponent: AppComponent) {
     this.service = service
-    this.email = "chitchings16@gmail.com"
-    service.getCars(this.todo, this.email);
+    service.getCars(this.todo, email);
+    this.appComponent = appComponent
+    this.appComponent.connected = true
   }
 
   newTask(): void {
@@ -35,8 +53,8 @@ export class DashboardPageComponent {
           return;
         }
         result.task.id = result.task.Nickname
-        result.task.Account = this.email
-        this.service.setCar(this.email, result.task.id, result.task)
+        result.task.Account = email
+        this.service.setCar(email, result.task.id, result.task)
         this.todo.push(result.task);
       });
     }
@@ -75,13 +93,13 @@ export class DashboardPageComponent {
           result.task.id = result.task.Nickname
         }
         if (result.task.Nickname != name) {
-          this.service.deleteCar(this.email, name, false)
+          this.service.deleteCar(email, name, false)
         }
         if (result.delete) {
-          this.service.deleteCar(this.email,result.task.id, true)
+          this.service.deleteCar(email,result.task.id, true)
           dataList.splice(taskIndex, 1);
         } else {
-          this.service.setCar(this.email,result.task.id,result.task)
+          this.service.setCar(email,result.task.id,result.task)
           dataList[taskIndex] = task;
         }
       });
