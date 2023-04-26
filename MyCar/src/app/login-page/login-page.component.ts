@@ -23,6 +23,15 @@ password : string ="";
 signuppassword : string ="";
 password2 : string ="";
 show: boolean= false;
+
+signUpButton() {
+    document.getElementById('container')?.classList.add("right-panel-active")
+}
+
+signInButton() {
+    document.getElementById('container')?.classList.remove("right-panel-active")
+}
+
 submit(){
     this.service.signIn(this.username,this.password);
     this.connected = this.service.connected;
