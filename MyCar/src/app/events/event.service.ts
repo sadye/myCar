@@ -39,7 +39,7 @@ export class EventService {
         id: doc.get("id"),
         Name: doc.get("Name"),
         Car: doc.get("Car"),
-        Date: doc.get("Date"),
+        Date: new Date(doc.get("Date")),
         Price: doc.get("Price"),
         Type: doc.get("Type"),
         Description: doc.get("Description")
@@ -74,7 +74,7 @@ export class EventService {
     }
       await setDoc(doc(db, 'users', email, 'cars', event.Car, 'events', id), {
         Name: event.Name,
-        Date: event.Date,
+        Date: event.Date.toString(),
         Type: event.Type,
         Price: event.Price,
         Description: event.Description,
