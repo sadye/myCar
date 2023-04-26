@@ -12,12 +12,14 @@
     routerLinkActive="active" ariaCurrentWhenActive="page" aria-hidden="false">Dashboard</button>
     <button mat-button routerLink="/Events" 
     routerLinkActive="active" ariaCurrentWhenActive="page"> Events </button>
-    <button mat-button > Price Analytics </button>
-    <button mat-button> Resources </button>
-
+    <!-- <button mat-button > Price Analytics </button>
+    <button mat-button> Resources </button> -->
+    <span class="example-spacer"></span>
+    <span>MyCar</span>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
+
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="logOut()">
         <mat-icon>logout</mat-icon>
