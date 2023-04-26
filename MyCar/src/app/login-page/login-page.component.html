@@ -5,36 +5,59 @@
     routerLinkActive="active" ariaCurrentWhenActive="page" aria-hidden="false">Dashboard</button>
 </p>
 -->
-<form class="example-form">
-<mat-form-field class="example-full-width" appearance="fill">
-<mat-label>User Name</mat-label>
-<input matInput placeholder="Enter your name" name="usename"
-[(ngModel)] ="username">
-</mat-form-field>
-<mat-form-field class="example-full-width" appearance="fill">
-<mat-label>Password</mat-label>
-<input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "password">
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="submit()"> Sign In </button>
-<button mat-raised-button color="primary" *ngIf="connected" routerLink="/Dashboard" 
-routerLinkActive="active" ariaCurrentWhenActive="page" aria-hidden="false">Dashboard</button>
-</form>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+        <form class="example-form 2">
+            <h1>Create Account</h1>
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your email" name="usename"
+            [(ngModel)] ="signupusername">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "signuppassword">
+            </mat-form-field>
+        
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Confrim Password</mat-label>
+                <input matInput placeholder="Confirm your password" value="" name="password2" type="password" [(ngModel)]= "password2">
+                </mat-form-field>
+            <button mat-raised-button color="primary" (click)="signUp()"> Sign Up </button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form >
+            <h1>Sign in</h1>
+            <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your email" name="usename"
+            [(ngModel)] ="username">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "password">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submit()"> Sign In </button>
+            <button mat-raised-button color="primary" *ngIf="connected" routerLink="/Dashboard" 
+            routerLinkActive="active" ariaCurrentWhenActive="page" aria-hidden="false">Dashboard</button>
+        </form>
+
+    </div>
+    <div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1> MyCar!</h1>
+				<p>To your car updated please login with your personal info</p>
+				<button class="ghost" (click)="signInButton()">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Welcome to MyCar!</h1>
+				<p>Enter your personal details and start your roadtrip with us</p>
+				<button class="ghost" (click)="signUpButton()">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-<form class="example-form 2">
-    <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>User Name</mat-label>
-    <input matInput placeholder="Enter your name" name="usename"
-    [(ngModel)] ="signupusername">
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "signuppassword">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Confrim Password</mat-label>
-        <input matInput placeholder="Confirm your password" value="" name="password2" type="password" [(ngModel)]= "password2">
-        </mat-form-field>
-    <button mat-raised-button color="primary" (click)="signUp()"> Sign Up </button>
-    </form>
