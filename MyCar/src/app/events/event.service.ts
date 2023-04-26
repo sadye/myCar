@@ -30,7 +30,10 @@ export class EventService {
 
   constructor() { }
 
-  async getEvents(list:Event[]) {
+  async getEvents(list:Event[], email: string) {
+    if (email == "" || email == null) {
+      return
+    }
     const events = query(collectionGroup(db,'events'));
     const querySnapshot = await getDocs(events);
     querySnapshot.forEach(async(doc)  => {
