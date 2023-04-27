@@ -37,7 +37,8 @@ submit(){
     this.connected = this.service.connected;
 }
 signUp() {
-    if (this.password === this.password2) {
+    if (this.signuppassword === this.password2) {
+         console.log()
     this.service.signUp(this.signupusername,this.signuppassword)
     this.connected = this.service.connected;
     }
