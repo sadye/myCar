@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = "MyCar";
   connected: boolean
 
   constructor(private router: Router) {
