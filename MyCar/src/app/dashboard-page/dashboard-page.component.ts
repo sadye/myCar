@@ -9,7 +9,10 @@ import { AppComponent } from '../app.component';
 
 var email: string
 const auth = getAuth();
-
+onAuthStateChanged(auth,(user) => {
+  if (user?.email)
+  email = user?.email
+})
 
 @Component({
   selector: 'app-dashboard-page',
@@ -23,9 +26,7 @@ export class DashboardPageComponent {
   
   constructor(private dialog: MatDialog, service: CarService, appComponent: AppComponent) {
     this.service = service
-    if (auth.currentUser?.email) {
-      service.getCars(this.todo, auth.currentUser?.email);
-    }
+      service.getCars(this.todo,email);
     this.appComponent = appComponent
     this.appComponent.connected = true
   }
