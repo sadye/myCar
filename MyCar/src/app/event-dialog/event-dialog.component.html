@@ -8,11 +8,14 @@
       <input matInput cdkFocusInitial [(ngModel)]="data.event.Name" required/>
     </mat-form-field>
     <div fxLayout="row" fxLayoutGap="20px">
-      <mat-form-field>
+      <mat-form-field *ngIf="!!cars">
         <mat-label>Car</mat-label>
-        <input matInput cdkFocusInitial [(ngModel)]="data.event.Car" required/>
+        <mat-select [(ngModel)]="data.event.Car">
+          <mat-option *ngFor="let car of cars" [value]="car.Nickname" >
+            {{car.Nickname}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      
       <mat-form-field appearance="fill">
         <mat-label>Type</mat-label>
         <mat-select [(ngModel)]="data.event.Type">
@@ -24,7 +27,8 @@
   
       <mat-form-field>
         <mat-label>Price</mat-label>
-        <input matInput cdkFocusInitial [(ngModel)]="data.event.Price" required/>
+        <input matInput type="number" [(ngModel)]="data.event.Price" required/>
+    <span matTextPrefix>$&nbsp;</span>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px">
