@@ -9,18 +9,7 @@ import { AppComponent } from '../app.component';
 
 var email: string
 const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    if (user.email) {
-      email = user.email
-    }
-    // ...
-  } else {
-    email = ""
-  }
-});
+
 
 @Component({
   selector: 'app-dashboard-page',
@@ -34,7 +23,9 @@ export class DashboardPageComponent {
   
   constructor(private dialog: MatDialog, service: CarService, appComponent: AppComponent) {
     this.service = service
-    service.getCars(this.todo, email);
+    if (auth.currentUser?.email) {
+      service.getCars(this.todo, auth.currentUser?.email);
+    }
     this.appComponent = appComponent
     this.appComponent.connected = true
   }

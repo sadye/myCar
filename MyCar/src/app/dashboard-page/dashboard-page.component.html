@@ -1,10 +1,18 @@
-<div fxLayout="row" fxLayoutAlign="space-between start">
+<div >
     <div class="content-wrapper">
-      <button (click)="newTask()" mat-button>
+      <button (click)="newTask()" mat-raised-button>
         <mat-icon>add</mat-icon> Add Car
       </button>
       <sidemenu></sidemenu>
-      <div class="container-wrapper">
+      <p class="empty-label" *ngIf="todo.length === 0">No Cars</p>
+      <div fxLayout="row wrap">
+        <div fxFlex="20" class="example-card" *ngFor="let task of todo">
+          
+          <app-task (edit)="editTask('todo',$event)"  cdkDrag [task]="task"></app-task>
+        </div>
+      </div>
+      
+      <!-- <div class="container-wrapper">
           <div class="container">
             <mat-card
               cdkDropList
@@ -17,6 +25,6 @@
               <app-task (edit)="editTask('todo',$event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
             </mat-card>
           </div>
-      </div>
+      </div> -->
     </div>
   </div>
