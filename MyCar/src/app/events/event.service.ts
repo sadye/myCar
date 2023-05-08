@@ -30,7 +30,7 @@ export class EventService {
 
   constructor() { }
 
-  async getEvents(pastList:Event[],futureList: Event[], email: string) {
+  async getEvents(pastList:Event[],futureList: Event[], email: string ) {
     if (email == "" || email == null) {
       return
     }
@@ -57,7 +57,32 @@ export class EventService {
         }
       })
       })
-    console.log('out')
+  }
+
+  async getSpecificEvents(pastList:Event[],futureList: Event[], email: string, carName: string ) {
+    if (email == "" || email == null) {
+      return
+    }
+      const eventList = await getDocs(collection(db,'users', email, 'cars', carName, 'events')) // get list of events
+      eventList.forEach(async(doc) => { // for every event
+        var newEvent: Event;
+        newEvent = {
+          id: doc.get("id"),
+          Name: doc.get("Name"),
+          Car: doc.get("Car"),
+          Date: new Date(doc.get("Date")),
+          Price: doc.get("Price"),
+          Type: doc.get("Type"),
+          Description: doc.get("Description")
+        }
+        if(newEvent.Date < new Date()){
+          pastList.push(newEvent)
+          pastList.sort((a:Event, b:Event)=> b.Date.getTime()- a.Date.getTime())
+        }else {
+          futureList.push(newEvent)
+          futureList.sort((a:Event, b:Event)=> a.Date.getTime()- b.Date.getTime())
+        }
+      })
   }
   async pastEvents(pastEvents:Event[], futureEvents: Event[], email: string) {
   if (email == "" || email == null) {
