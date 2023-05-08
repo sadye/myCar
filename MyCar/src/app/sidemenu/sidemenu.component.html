@@ -7,12 +7,12 @@
           class="list">           
           <p class="empty-label" *ngIf="future.length === 0">No Events</p>
           <mat-card *ngFor="let event of future">
-          <mat-card-header> 
+          <mat-card-header align="left"> 
             <mat-card-title> {{event.Name}} </mat-card-title>
             <mat-card-subtitle> {{event.Car}} </mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions>
-            <p>{{event.Date | date}}</p>
+            <p class="event-date">{{event.Date | date}}</p>
           </mat-card-actions>
         </mat-card>
         </div>
