@@ -50,11 +50,14 @@ export class EventService {
         }
         if(newEvent.Date < new Date()){
           pastList.push(newEvent)
+          pastList.sort((a:Event, b:Event)=> b.Date.getTime()- a.Date.getTime())
         }else {
           futureList.push(newEvent)
+          futureList.sort((a:Event, b:Event)=> a.Date.getTime()- b.Date.getTime())
         }
       })
       })
+    console.log('out')
   }
   async pastEvents(pastEvents:Event[], futureEvents: Event[], email: string) {
   if (email == "" || email == null) {
@@ -79,9 +82,28 @@ export class EventService {
      futureEvents.push(newEvent);
     }
   })
-  console.log(pastEvents);
-  console.log(futureEvents);
+   this.sortByFutureDate(futureEvents);
+   this.sortByDueDate(pastEvents);
  } 
+
+ private getTime(date?: Date) {
+  return date != null ? date.getTime() : 0;
+}
+
+
+private sortByDueDate(list: Event[]): void {
+  list.sort((a: Event, b: Event) => {
+      return this.getTime(a.Date) - this.getTime(b.Date);
+  });
+}
+
+private sortByFutureDate(list: Event[]): void {
+  console.log('infut')
+  list.sort((a: Event, b: Event) => {
+      return this.getTime(b.Date) - this.getTime(a.Date);
+  });
+  console.log('postfut')
+}
   
   makeRandom(lengthOfCode: number, possible: string) {
     let text = "";
