@@ -10,19 +10,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ContentObserver } from '@angular/cdk/observers';
 
 var email: string
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    if (user.email) {
-      email = user.email
-    }
-    // ...
-  } else {
-    email = ""
-  }
-});
+
 
 @Component({
   selector: 'app-event-page',
@@ -36,8 +24,21 @@ export class EventPageComponent {
   service: EventService
 
   constructor(private dialog: MatDialog, service: EventService) {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        if (user.email) {
+          email = user.email
+          this.service.getEvents(this.past, this.future, email);
+        }
+        // ...
+      } else {
+        email = ""
+      }
+    });
     this.service = service
-    this.service.getEvents(this.past, this.future, email);
     console.log(new Date().toDateString())
   }
 
@@ -68,7 +69,6 @@ export class EventPageComponent {
           return;
         }
         const carName = result.event.Car
-        this.service.getCarRef(email, result.event)
         this.service.setEvent(email,result.event)
         this.todo.push(result.event);
         if(result.event.Date < new Date()){

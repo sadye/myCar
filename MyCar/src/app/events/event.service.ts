@@ -42,7 +42,7 @@ export class EventService {
         newEvent = {
           id: doc.get("id"),
           Name: doc.get("Name"),
-          Car: doc.get("Car"),
+          Car: doc1.get("Nickname"),
           Date: new Date(doc.get("Date")),
           Price: doc.get("Price"),
           Type: doc.get("Type"),
