@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-  <button (click)="newEvent()" mat-button>
+  <button (click)="newEvent()" mat-stroked-button color="primary">
     <mat-icon>add</mat-icon> Add Event
   </button>
   <div class="container-wrapper">
@@ -14,7 +14,7 @@
           id="future"
           class="list">
           <p class="empty-label" *ngIf="future.length === 0">No Events</p>
-          <app-eventdetail (edit)="editEvent(future,$event)" *ngFor="let event of future" [event]="event"></app-eventdetail>
+          <app-eventdetail (edit)="editEvent(future, false, $event)" *ngFor="let event of future" [event]="event"></app-eventdetail>
           </mat-card>
         </mat-expansion-panel>
         <mat-expansion-panel>
@@ -27,7 +27,7 @@
           id="past"
           class="list">
           <p class="empty-label" *ngIf="past.length === 0">No Events</p>
-          <app-eventdetail (edit)="editEvent(past,$event)" *ngFor="let event of past" [event]="event"></app-eventdetail>
+          <app-eventdetail (edit)="editEvent(past, true, $event)" *ngFor="let event of past" [event]="event"></app-eventdetail>
           </mat-card>
         </mat-expansion-panel>
       </div>

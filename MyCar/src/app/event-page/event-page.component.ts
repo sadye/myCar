@@ -5,7 +5,7 @@ import { EventDialogComponent, EventDialogResult } from '../event-dialog/event-d
 import { Event } from '../eventdetail/event';
 import { CarService } from '../cars.service';
 import { EventService } from '../events/event.service';
-import { every } from 'rxjs';
+import { every, from } from 'rxjs';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ContentObserver } from '@angular/cdk/observers';
 
@@ -72,9 +72,9 @@ export class EventPageComponent {
         this.service.setEvent(email,result.event)
         this.todo.push(result.event);
         if(result.event.Date < new Date()){
-          this.past.push(result.event)
+          this.pastSorting(result.event);
         }else {
-          this.future.push(result.event)
+          this.futureSorting(result.event)
         } 
       });
     }
@@ -93,7 +93,7 @@ export class EventPageComponent {
       );
     }
 
-    editEvent(list: Event[], event: Event): void {
+    editEvent(list: Event[], fromPast: boolean, event: Event): void {
       const dialogRef = this.dialog.open(EventDialogComponent, {
         width: '500px',
         data: {
@@ -112,9 +112,32 @@ export class EventPageComponent {
           dataList.splice(eventIndex, 1);
         } else {
           this.service.setEvent(email, result.event)
+            if(fromPast && result.event.Date >= new Date()){
+              /// if should be moved to future
+              dataList.splice(eventIndex, 1);
+              this.futureSorting(result.event)
+              return;
+            } else if (!fromPast && result.event.Date < new Date()){
+              ///of should be moved to past
+              dataList.splice(eventIndex, 1);
+              this.pastSorting(result.event)
+              return;
+            }
           dataList[eventIndex] = event;
+          this.past.sort((a:Event, b:Event)=> b.Date.getTime()- a.Date.getTime())
+          this.future.sort((a:Event, b:Event)=> a.Date.getTime()- b.Date.getTime())
+
         }
       });
+    }
+
+    pastSorting(event: Event){
+      this.past.push(event);
+      this.past.sort((a:Event, b:Event)=> b.Date.getTime()- a.Date.getTime())
+    }
+    futureSorting(event:Event){
+      this.future.push(event);
+      this.future.sort((a:Event, b:Event)=> a.Date.getTime()- b.Date.getTime())
     }
 
 }
