@@ -13,19 +13,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 var email: string
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    if (user.email) {
-      email = user.email
-    }
-    // ...
-  } else {
-    email = ""
-  }
-});
+
 
 @Component({
   selector: 'sidemenu',
@@ -40,7 +28,20 @@ export class SidemenuComponent {
 
   constructor(private dialog: MatDialog, service: EventService) {
     this.service = service
-    this.service.getEvents(this.past, this.future, email);
+    const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    if (user.email) {
+      email = user.email
+      this.service.getEvents(this.past, this.future, email);
+    }
+    // ...
+  } else {
+    email = ""
+  }
+});
     console.log(new Date().toDateString())
   }
 

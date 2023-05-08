@@ -8,11 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AppComponent } from '../app.component';
 
 var email: string
-const auth = getAuth();
-onAuthStateChanged(auth,(user) => {
-  if (user?.email)
-  email = user?.email
-})
+
 
 @Component({
   selector: 'app-dashboard-page',
@@ -26,7 +22,12 @@ export class DashboardPageComponent {
   
   constructor(private dialog: MatDialog, service: CarService, appComponent: AppComponent) {
     this.service = service
-      service.getCars(this.todo,email);
+    const auth = getAuth();
+onAuthStateChanged(auth,(user) => {
+  if (user?.email)
+  email = user?.email
+  service.getCars(this.todo,email);
+})
     this.appComponent = appComponent
     this.appComponent.connected = true
   }
