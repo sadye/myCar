@@ -34,21 +34,23 @@ export class EventService {
     if (email == "" || email == null) {
       return
     }
-    const events = query(collectionGroup(db,'events'));
-    const querySnapshot = await getDocs(events);
-    querySnapshot.forEach(async(doc)  => {
-      var newEvent: Event;
-      newEvent = {
-        id: doc.get("id"),
-        Name: doc.get("Name"),
-        Car: doc.get("Car"),
-        Date: new Date(doc.get("Date")),
-        Price: doc.get("Price"),
-        Type: doc.get("Type"),
-        Description: doc.get("Description")
-      }
-      list.push(newEvent);
-    })
+    const querySnapshot = await getDocs(collection(db, "users", email, "cars"));// get list of cars
+    querySnapshot.forEach(async(doc)  => {// for every car
+      const eventList = await getDocs(collection(db,'users', email, 'cars', doc.id, 'events')) // get list of events
+      eventList.forEach(async(doc) => { // for every event
+        var newEvent: Event;
+        newEvent = {
+          id: doc.get("id"),
+          Name: doc.get("Name"),
+          Car: doc.get("Car"),
+          Date: new Date(doc.get("Date")),
+          Price: doc.get("Price"),
+          Type: doc.get("Type"),
+          Description: doc.get("Description")
+        }
+        list.push(newEvent);
+      })
+      })
   }
   async pastEvents(pastEvents:Event[], futureEvents: Event[], email: string) {
   if (email == "" || email == null) {
