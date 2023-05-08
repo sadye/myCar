@@ -37,10 +37,8 @@ export class EventPageComponent {
 
   constructor(private dialog: MatDialog, service: EventService) {
     this.service = service
-    this.service.getEvents(this.todo, email);
-    console.log('got events', this.todo)
-    this.filterEvents()
-    console.log('filtered events', this.past, this.future)
+    this.service.getEvents(this.past, this.future, email);
+    console.log(new Date().toDateString())
   }
 
   filterEvents(){
@@ -95,7 +93,7 @@ export class EventPageComponent {
       );
     }
 
-    editEvent(dataList: Event[], event: Event): void {
+    editEvent(list: Event[], event: Event): void {
       const dialogRef = this.dialog.open(EventDialogComponent, {
         width: '500px',
         data: {
@@ -107,7 +105,7 @@ export class EventPageComponent {
         if (!result) {
           return;
         }
-      
+        const dataList = list;
         const eventIndex = dataList.indexOf(event);
         if (result.delete) {
           this.service.deleteEvent(email, result.event)
