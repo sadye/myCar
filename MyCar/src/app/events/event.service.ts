@@ -30,13 +30,13 @@ export class EventService {
 
   constructor() { }
 
-  async getEvents(list:Event[], email: string) {
+  async getEvents(pastList:Event[],futureList: Event[], email: string) {
     if (email == "" || email == null) {
       return
     }
     const querySnapshot = await getDocs(collection(db, "users", email, "cars"));// get list of cars
-    querySnapshot.forEach(async(doc)  => {// for every car
-      const eventList = await getDocs(collection(db,'users', email, 'cars', doc.id, 'events')) // get list of events
+    querySnapshot.forEach(async(doc1)  => {// for every car
+      const eventList = await getDocs(collection(db,'users', email, 'cars', doc1.id, 'events')) // get list of events
       eventList.forEach(async(doc) => { // for every event
         var newEvent: Event;
         newEvent = {
@@ -48,7 +48,11 @@ export class EventService {
           Type: doc.get("Type"),
           Description: doc.get("Description")
         }
-        list.push(newEvent);
+        if(newEvent.Date < new Date()){
+          pastList.push(newEvent)
+        }else {
+          futureList.push(newEvent)
+        }
       })
       })
   }
