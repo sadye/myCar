@@ -14,7 +14,7 @@
           id="future"
           class="list">
           <p class="empty-label" *ngIf="future.length === 0">No Events</p>
-          <app-eventdetail (edit)="editEvent(future,$event)" *ngFor="let event of future" cdkDrag [event]="event"></app-eventdetail>
+          <app-eventdetail (edit)="editEvent(future,$event)" *ngFor="let event of future" [event]="event"></app-eventdetail>
           </mat-card>
         </mat-expansion-panel>
 
@@ -29,15 +29,9 @@
           id="past"
           class="list">
           <p class="empty-label" *ngIf="past.length === 0">No Events</p>
-          <app-eventdetail (edit)="editEvent(past,$event)" *ngFor="let event of past" cdkDrag [event]="event"></app-eventdetail>
+          <app-eventdetail (edit)="editEvent(past,$event)" *ngFor="let event of past" [event]="event"></app-eventdetail>
           </mat-card>
         </mat-expansion-panel>
-        <mat-card
-        id="todo"
-        class="list">
-        <p class="empty-label" *ngIf="future.length === 0">No Events</p>
-        <app-eventdetail (edit)="editEvent(todo,$event)" *ngFor="let event of todo" [event]="event"></app-eventdetail>
-        </mat-card>
       </div>
   </div>
 </div>
