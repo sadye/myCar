@@ -34,25 +34,48 @@ export class EventService {
     if (email == "" || email == null) {
       return
     }
-    const querySnapshot = await getDocs(collection(db,'users',email,'cars'));
+    const events = query(collectionGroup(db,'events'));
+    const querySnapshot = await getDocs(events);
     querySnapshot.forEach(async(doc)  => {
-      const events = await getDocs(collection(db,'users',email,'cars', doc.get("Nickname"),'events'))
-      events.forEach((doc) => {
-        var newEvent: Event;
-        newEvent = {
-          id: doc.get("id"),
-          Name: doc.get("Name"),
-          Car: doc.get("Car"),
-          Date: new Date(doc.get("Date")),
-          Price: doc.get("Price"),
-          Type: doc.get("Type"),
-          Description: doc.get("Description")
-        }
-        list.push(newEvent);
-      })
+      var newEvent: Event;
+      newEvent = {
+        id: doc.get("id"),
+        Name: doc.get("Name"),
+        Car: doc.get("Car"),
+        Date: new Date(doc.get("Date")),
+        Price: doc.get("Price"),
+        Type: doc.get("Type"),
+        Description: doc.get("Description")
+      }
+      list.push(newEvent);
     })
   }
-  
+  async pastEvents(pastEvents:Event[], futureEvents: Event[], email: string) {
+  if (email == "" || email == null) {
+    return
+  }
+  const events = query(collectionGroup(db,'events'));
+  const querySnapshot = await getDocs(events);
+  querySnapshot.forEach(async(doc)  => {
+    var newEvent: Event;
+    newEvent = {
+      id: doc.get("id"),
+      Name: doc.get("Name"),
+      Car: doc.get("Car"),
+      Date: new Date(doc.get("Date")),
+      Price: doc.get("Price"),
+      Type: doc.get("Type"),
+      Description: doc.get("Description")
+    }
+    if(new Date() > newEvent.Date) {
+       pastEvents.push(newEvent);
+    } else {
+     futureEvents.push(newEvent);
+    }
+  })
+  console.log(pastEvents);
+  console.log(futureEvents);
+ } 
   
   makeRandom(lengthOfCode: number, possible: string) {
     let text = "";

@@ -69,6 +69,11 @@ export class EventPageComponent {
         this.service.getCarRef(email, result.event)
         this.service.setEvent(email,result.event)
         this.todo.push(result.event);
+        if(result.event.Date < new Date()){
+          this.past.push(result.event)
+        }else {
+          this.future.push(result.event)
+        } 
       });
     }
     drop(event: CdkDragDrop<Event[]>): void {

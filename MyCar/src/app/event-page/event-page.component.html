@@ -1,19 +1,47 @@
 <div class="content-wrapper">
-    <button (click)="newEvent()" mat-button>
-      <mat-icon>add</mat-icon> Add Event
-    </button>
-    <div class="container-wrapper">
-        <div class="container">
+  <button (click)="newEvent()" mat-button>
+    <mat-icon>add</mat-icon> Add Event
+  </button>
+  <div class="container-wrapper">
+      <div class="container">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Upcoming Events
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Upcoming events</p>
           <mat-card
-            cdkDropList
-            id="todo"
-            #todoList="cdkDropList"
-            [cdkDropListData]="todo"
-            (cdkDropListDropped)="drop($event)"
-            class="list">
-            <p class="empty-label" *ngIf="todo.length === 0">No Events</p>
-            <app-eventdetail (edit)="editEvent('todo',$event)" *ngFor="let event of todo" cdkDrag [event]="event"></app-eventdetail>
+          cdkDropList
+          id="todo"
+          #todoList="cdkDropList"
+          [cdkDropListData]="todo"
+          (cdkDropListDropped)="drop($event)"
+          class="list">
+          <p class="empty-label" *ngIf="todo.length === 0">No Events</p>
+          <app-eventdetail (edit)="editEvent('todo',$event)" *ngFor="let event of todo" cdkDrag [event]="event"></app-eventdetail>
           </mat-card>
-        </div>
-    </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Past Events
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Past events</p>
+          <mat-card
+          cdkDropList
+          id="todo"
+          #todoList="cdkDropList"
+          [cdkDropListData]="todo"
+          (cdkDropListDropped)="drop($event)"
+          class="list">
+          <p class="empty-label" *ngIf="todo.length === 0">No Events</p>
+          <app-eventdetail (edit)="editEvent('todo',$event)" *ngFor="let event of todo" cdkDrag [event]="event"></app-eventdetail>
+          </mat-card>
+        </mat-expansion-panel>
+      </div>
   </div>
+</div>
