@@ -7,6 +7,7 @@ import { CarService } from '../cars.service';
 import { EventService } from '../events/event.service';
 import { every } from 'rxjs';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ContentObserver } from '@angular/cdk/observers';
 
 var email: string
 const auth = getAuth();
@@ -37,19 +38,22 @@ export class EventPageComponent {
   constructor(private dialog: MatDialog, service: EventService) {
     this.service = service
     this.service.getEvents(this.todo, email);
-    console.log(new Date().toDateString())
+    console.log('got events', this.todo)
+    this.filterEvents()
+    console.log('filtered events', this.past, this.future)
   }
 
-  isPast(element: Event, index: any, array: Event[]) { 
-    return (element.Date < new Date()); 
- }
- isFuture(element: Event, index: any, array: Event[]) { 
-  return (element.Date >= new Date()); 
-}
-
   filterEvents(){
-    this.past = this.todo.filter(this.isPast);
-    this.future = this.todo.filter(this.isFuture);
+    this.past = [];
+    this.future = [];
+    this.todo.forEach(element => {
+    if(element.Date < new Date()){
+      this.past.push(element)
+    } else {
+      this.future.push(element)
+    }
+    });
+    console.log(this.past, this.future)
   }
 
   newEvent(): void {
@@ -91,7 +95,7 @@ export class EventPageComponent {
       );
     }
 
-    editEvent(list: 'todo', event: Event): void {
+    editEvent(dataList: Event[], event: Event): void {
       const dialogRef = this.dialog.open(EventDialogComponent, {
         width: '500px',
         data: {
@@ -103,7 +107,7 @@ export class EventPageComponent {
         if (!result) {
           return;
         }
-        const dataList = this[list];
+      
         const eventIndex = dataList.indexOf(event);
         if (result.delete) {
           this.service.deleteEvent(email, result.event)
