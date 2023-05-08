@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDialogComponent, EventDialogResult } from '../event-dialog/event-dialog.component';
 import { Event } from '../eventdetail/event';
-import { CarService } from '../cars.service';
+import { CarService } from '../cars/car.service';
 import { EventService } from '../events/event.service';
 import { every, from } from 'rxjs';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ContentObserver } from '@angular/cdk/observers';
+import { Task } from '../task/task';
 
 var email: string
 
@@ -18,12 +19,15 @@ var email: string
   styleUrls: ['./event-page.component.scss']
 })
 export class EventPageComponent {
+  carService: CarService;
   todo: Event[] = [];
   past: Event[] = []
   future: Event[] = []
   service: EventService
+  cars: Task[] = [];
+  car: string = "All";
 
-  constructor(private dialog: MatDialog, service: EventService) {
+  constructor(private dialog: MatDialog, service: EventService, carService: CarService) {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,12 +36,14 @@ export class EventPageComponent {
         if (user.email) {
           email = user.email
           this.service.getEvents(this.past, this.future, email);
+          this.carService.getCars(this.cars, email);
         }
         // ...
       } else {
         email = ""
       }
     });
+    this.carService = carService
     this.service = service
     console.log(new Date().toDateString())
   }
@@ -138,6 +144,18 @@ export class EventPageComponent {
     futureSorting(event:Event){
       this.future.push(event);
       this.future.sort((a:Event, b:Event)=> a.Date.getTime()- b.Date.getTime())
+    }
+
+    getNewCars(){
+      console.log('here')
+      console.log(this.car)
+      this.past = []
+      this.future = []
+      if (!this.car){
+        this.service.getEvents(this.past, this.future, email);
+      }else{
+        this.service.getSpecificEvents(this.past, this.future, email, this.car);
+      }
     }
 
 }
