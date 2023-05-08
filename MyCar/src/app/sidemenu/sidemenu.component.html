@@ -1,4 +1,22 @@
 <div class="sidemenu" style="background-color:#e6e6ff">
     <h3 class="upcoming-events"><strong>Upcoming Events</strong></h3>
-    <h4 class="upcoming-events-list">... events ...</h4>
+    <mat-sidenav-container>
+        <mat-sidenav> </mat-sidenav>
+        <mat-sidenav-content>
+          <div id="future"
+          class="list">           
+          <p class="empty-label" *ngIf="future.length === 0">No Events</p>
+          <mat-card *ngFor="let event of future">
+          <mat-card-header> 
+            <mat-card-title> {{event.Name}} </mat-card-title>
+            <mat-card-subtitle> {{event.Car}} </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <p>{{event.Date | date}}</p>
+          </mat-card-actions>
+        </mat-card>
+        </div>
+          <button mat-button color="primary" class="nav-link" routerLinkActive="active" routerLink="/event-page"> All Events </button>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
 </div>
